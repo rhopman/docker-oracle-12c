@@ -12,6 +12,9 @@ if [ -d /mnt/database/oradata ]; then
   # Start the database
   sqlplus / as sysdba @/home/oracle/startup.sql
 
+  # Start TNS listener
+  lsnrctl start
+  
   # Tail the alert log so the process will keep running
   tail -n 100 -f /mnt/database/diag/rdbms/${ORACLE_SID}/${ORACLE_SID}/alert/log.xml | grep --line-buffered "<txt>" | stdbuf -o0 sed 's/ <txt>//'
 else
