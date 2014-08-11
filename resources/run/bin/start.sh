@@ -5,8 +5,8 @@ export PATH=$PATH:$ORACLE_HOME/bin
 
 echo "SPFILE='/mnt/database/dbs/spfile${ORACLE_SID}.ora'" > /opt/oracle/product/12.1.0.2/dbhome_1/dbs/init${ORACLE_SID}.ora
 
-# Check if /mnt/database is empty
-if [ "$(ls -A /mnt/database)" ]; then
+# Check if database already exists
+if [ -d /mnt/database/oradata ]; then
   echo "Starting database found in /mnt/database"
 
   # Start the database
