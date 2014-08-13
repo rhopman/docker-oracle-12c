@@ -72,10 +72,10 @@ $ mkdir /tmp/database
 ```
 
 Start the container, passing the Oracle SID that you want to use. In this example,
-I'll use `tstdb` as the SID:
+I'll use `FOO` as the SID:
 
 ```
-$ docker run -e ORACLE_SID=tstdb -v /tmp/database:/mnt/database oracle12c
+$ docker run -e COMMAND=initdb -e ORACLE_SID=FOO -v /tmp/db-FOO:/mnt/database oracle12c
 ```
 
 ## Step 6: Run the database server
@@ -84,15 +84,41 @@ Start the container again, using the same SID and pointing to (a snapshot of) th
 same volume:
 
 ```
-$ docker run -e ORACLE_SID=tstdb -v /tmp/database:/mnt/database -P oracle12c
+$ docker run -e COMMAND=rundb -e ORACLE_SID=FOO -v /tmp/db-FOO:/mnt/database -P --name db1 oracle12c
 ```
 
 This will start the server and show the alert log. If you want to run it in the
 background, add a -d switch:
 
 ```
-$ docker run -d -e ORACLE_SID=tstdb -v /tmp/database:/mnt/database -P oracle12c
+$ docker run -d -e COMMAND=rundb -e ORACLE_SID=FOO -v /tmp/db-FOO:/mnt/database -P --name db1 oracle12c
 ```
 
 When the container is running, port 1521 is exposed. You can user `docker ps` to
 see the running Docker processes and find out which port is used on the host.
+
+## More
+
+To start sqlplus as sys in the database, and shut it down afterwards:
+
+```
+docker run -i -t -e COMMAND=sqlpluslocal -e ORACLE_SID=FOO -v /tmp/db-FOO:/mnt/database oracle12c
+```
+
+To run all *.sql scripts in /tmp/sql in the database, and shut it down afterwards:
+
+```
+docker run -e COMMAND=runsqllocal -e ORACLE_SID=FOO -v /tmp/db-FOO:/mnt/database -v /tmp/sql:/mnt/sql oracle12c
+```
+
+To connect to the database FOO running in container db1 with sqlplus:
+
+```
+docker run -i -t -e COMMAND=sqlplusremote -e ORACLE_SID=FOO -e ORACLE_USER=system -e ORACLE_PASSWORD=password --link db1:remotedb -P oracle12c
+```
+
+To run all *.sql scripts in /tmp/sql in the database FOO running in container db1:
+
+```
+docker run -e COMMAND=runsqlremote -e ORACLE_SID=FOO -e ORACLE_USER=system -e ORACLE_PASSWORD=password --link db1:remotedb -v /tmp/sql:/mnt/sql oracle12c
+```
