@@ -105,7 +105,7 @@ To start sqlplus as sys in the database, and shut it down afterwards:
 docker run -i -t -e COMMAND=sqlpluslocal -e ORACLE_SID=FOO -v /tmp/db-FOO:/mnt/database oracle12c
 ```
 
-To run all *.sql scripts in /tmp/sql in the database, and shut it down afterwards:
+To run all `*.sql` scripts in `/tmp/sql` in the database, and shut it down afterwards:
 
 ```
 docker run -e COMMAND=runsqllocal -e ORACLE_SID=FOO -v /tmp/db-FOO:/mnt/database -v /tmp/sql:/mnt/sql oracle12c
@@ -117,7 +117,7 @@ To connect to the database FOO running in container db1 with sqlplus:
 docker run -i -t -e COMMAND=sqlplusremote -e ORACLE_SID=FOO -e ORACLE_USER=system -e ORACLE_PASSWORD=password --link db1:remotedb -P oracle12c
 ```
 
-To run all *.sql scripts in /tmp/sql in the database FOO running in container db1:
+To run all `*.sql` scripts in `/tmp/sql` in the database FOO running in container db1:
 
 ```
 docker run -e COMMAND=runsqlremote -e ORACLE_SID=FOO -e ORACLE_USER=system -e ORACLE_PASSWORD=password --link db1:remotedb -v /tmp/sql:/mnt/sql oracle12c
