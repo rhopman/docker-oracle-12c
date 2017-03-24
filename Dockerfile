@@ -17,7 +17,7 @@ RUN mkdir /opt/oraInventory
 RUN chown oracle:oinstall /opt/oraInventory
 
 # Required packages
-RUN yum install -y compat-libcap1 compat-libstdc++-33 libstdc++-devel gcc-c++ ksh make libaio-devel
+RUN yum install -y compat-libcap1 compat-libstdc++-33 libstdc++-devel gcc-c++ ksh make libaio-devel smartmontools net-tools
 # This one gives errors
 RUN yum install -y sysstat; true
 
@@ -36,6 +36,9 @@ RUN ln -s /home/oracle/bin/who /usr/bin/who
 # Install Oracle database
 USER oracle
 RUN /home/oracle/bin/install.sh
+
+# Abort build if installation was unsuccesful
+RUN if [ ! -d /opt/oracle/product ]; then exit 1; fi
 
 # Post-installation scripts
 USER root

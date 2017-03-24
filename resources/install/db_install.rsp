@@ -108,7 +108,7 @@ oracle.install.db.InstallEdition=EE
 #                                                                             #
 # PRIVILEGED OPERATING SYSTEM GROUPS                                          #
 # ------------------------------------------                                  #
-# Provide values for the OS groups to which OSDBA and OSOPER privileges       #
+# Provide values for the OS groups to which SYSDBA and SYSOPER privileges     #
 # needs to be granted. If the install is being performed as a member of the   #
 # group "dba", then that will be used unless specified otherwise below.       #
 #                                                                             #
@@ -118,30 +118,35 @@ oracle.install.db.InstallEdition=EE
 ###############################################################################
 
 #------------------------------------------------------------------------------
-# The DBA_GROUP is the OS group which is to be granted OSDBA privileges.
+# The OSDBA_GROUP is the OS group which is to be granted SYSDBA privileges.
 #-------------------------------------------------------------------------------
-oracle.install.db.DBA_GROUP=dba
+oracle.install.db.OSDBA_GROUP=dba
 
 #------------------------------------------------------------------------------
-# The OPER_GROUP is the OS group which is to be granted OSOPER privileges.
+# The OSOPER_GROUP is the OS group which is to be granted SYSOPER privileges.
 # The value to be specified for OSOPER group is optional.
 #------------------------------------------------------------------------------
-oracle.install.db.OPER_GROUP=
+oracle.install.db.OSOPER_GROUP=
 
 #------------------------------------------------------------------------------
-# The BACKUPDBA_GROUP is the OS group which is to be granted OSBACKUPDBA privileges.
+# The OSBACKUPDBA_GROUP is the OS group which is to be granted SYSBACKUP privileges.
 #------------------------------------------------------------------------------
-oracle.install.db.BACKUPDBA_GROUP=dba
+oracle.install.db.OSBACKUPDBA_GROUP=dba
 
 #------------------------------------------------------------------------------
-# The DGDBA_GROUP is the OS group which is to be granted OSDGDBA privileges.
+# The OSDGDBA_GROUP is the OS group which is to be granted SYSDG privileges.
 #------------------------------------------------------------------------------
-oracle.install.db.DGDBA_GROUP=dba
+oracle.install.db.OSDGDBA_GROUP=dba
 
 #------------------------------------------------------------------------------
-# The KMDBA_GROUP is the OS group which is to be granted OSKMDBA privileges.
+# The OSKMDBA_GROUP is the OS group which is to be granted SYSKM privileges.
 #------------------------------------------------------------------------------
-oracle.install.db.KMDBA_GROUP=dba
+oracle.install.db.OSKMDBA_GROUP=dba
+
+#------------------------------------------------------------------------------
+# The OSRACDBA_GROUP is the OS group which is to be granted SYSRAC privileges.
+#------------------------------------------------------------------------------
+oracle.install.db.OSRACDBA_GROUP=dba
 
 ###############################################################################
 #                                                                             #
